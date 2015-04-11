@@ -1,1 +1,2 @@
-# csc360-Team6
+# quickstart-html5
+HTML5 template
