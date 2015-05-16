@@ -2,18 +2,50 @@
 
 $(function () {
   'use strict';
+  main();
 
-  if (typeof(localStorage) == 'undefined' ) {
-    alert('Your browser does not support HTML5 localStorage. Try upgrading.');
-  } else {
-    try {
-      localStorage.setItem('name', '{"name": "CSC 360 Team 6 Project"}'); //saves to the database, “key”, “value”
-    } catch (e) {
-      if (e == QUOTA_EXCEEDED_ERR) {
-        alert('Quota exceeded!'); //data wasn’t successfully saved due to quota exceed so throw an error
+  function main() {
+    // Initialize Material Bootstrap Theme
+    $.material.init();
+    initUI();
+  }
+  
+  function initUI() {
+    if(localStorage.getItem("options") == "undefined" || localStorage.getItem("options") == null) {
+      initStorage();
+    } else {
+      var options = getOptions();
+      if(options.showNotifications) {
+        $("#notifications").prop("checked", "checked");
       }
     }
-    document.write(jQuery.parseJSON(localStorage.getItem('name')).name); //Hello World!
-    localStorage.removeItem('name'); //deletes the matching item from the database
+    
+    $("#notifications").click(function() {
+      var options = getOptions();
+      options.showNotifications = $("#notifications").prop("checked");
+      
+      localStorage.setItem("options", JSON.stringify(options));
+    });
+  }
+  
+  function getOptions() {
+    return JSON.parse(localStorage.getItem("options"));
+  }
+  
+  function saveOptions(options) {
+    localStorage.setItem("options", JSON.stringify(options));
+  }
+
+  function initStorage() {
+    var options = {
+      "showNotifications": true
+    };
+    var tasks = {
+      
+    };
+    
+    // LocalStorage can only store key/value as strings
+    localStorage.setItem("options", JSON.stringify(options));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 });
