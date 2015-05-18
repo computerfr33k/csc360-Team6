@@ -2,12 +2,29 @@
 
 $(function () {
   'use strict';
+  var db;
+  var DBOpenRequest;
+
+  // create a blank instance of the object that is used to transfer data into the IDB.
+  var newItem = [
+    {taskSubject: "", taskTitle: "", taskDueDate: "", taskCompleted: "no"}
+  ];
   main();
 
   function main() {
     // Initialize Material Bootstrap Theme
     $.material.init();
     initUI();
+
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+    window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+    DBOpenRequest = window.indexedDB.open("toDoList", 1);
+  }
+
+  DBOpenRequest.onsuccess = function(event) {
+    db = DBOpenRequest.result;
   }
   
   function initUI() {
