@@ -20,13 +20,12 @@ $(function () {
     var date = new Date(Date.parse(task.dueDate));
 
     db.open();
-    addTask({
-      subject: "CSC 360",
-      title: "Finish Prototype",
-      dueDate: date.toLocaleString(),
-      completed: false,
-      notify: true
-    });
+    
+    var options = {
+      valueNames: ['subject', 'title', 'dueDate', 'completed', 'notify']
+    };
+    
+    var taskList = new List('tasks', options);
   }
 
   /*
@@ -40,5 +39,13 @@ $(function () {
       completed: task.completed,
       notify: task.notify
     });
+  }
+
+  function editTask(task) {
+
+  }
+
+  function deleteTask(task) {
+
   }
 });
