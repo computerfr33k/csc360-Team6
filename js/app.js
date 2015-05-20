@@ -34,7 +34,7 @@ $(function () {
       addTask(task);
       $('#subject').val('');
       $('#title').val('');
-      $('dueDate').val('');
+      $('#dueDate').val('');
       $('#completed').prop('checked', '');
       $('#notify').prop('checked', 'checked');
     });
