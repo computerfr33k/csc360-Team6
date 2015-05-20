@@ -131,6 +131,13 @@
         </div>
       </div>
       <!-- /Options Dialog -->
+      <!-- Warning -->
+      <div class="alert alert-dismissable alert-warning" id="warning-alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Warning!</h4>
+        <p>Looks like you may have left some fields blank when adding a new task.</p>
+      </div>
+      <!-- /Warning -->
       <!-- Task Table -->
       <div id="tasks">
         <table class="table table-hover table-bordered text-center">
@@ -146,44 +153,45 @@
           </thead>
           <tbody class="list">
             <tr class="bg-info">
-            <td class="ot-valign">
-              <label>
-                <input class="form-control" id="subject" type="text" />
-              </label>
-            </td>
-            <td class="ot-valign">
-              <label>
-                <input id="title" class="form-control" type="text" />
-              </label>
-            </td>
-            <td class="ot-valign">
-              <div class="form-group">
-                <div class='input-group date' id='dueDatePicker'>
-                  <input id="dueDate" type='datetime' class="form-control form-control-success" />
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
+              <td class="ot-valign">
+                <label>
+                  <input class="form-control" id="subject" type="text" required="required" />
+                </label>
+              </td>
+              <td class="ot-valign">
+                <label>
+                  <input id="title" class="form-control" type="text" required="required" />
+                </label>
+              </td>
+              <td class="ot-valign">
+                <div class="form-group">
+                  <div class='input-group date' id='dueDatePicker'>
+                    <input id="dueDate" type='datetime' class="form-control form-control-success" required="required" />
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td class="ot-valign">
-              <div class="checkbox">
-                <label>
-                  <input id="completed" type="checkbox" />
-                </label>
-              </div>
-            </td>
-            <td class="ot-valign">
-              <div class="checkbox">
-                <label>
-                  <input id="notify" type="checkbox" />
-                </label>
-              </div>
-            </td>
-            <td class="ot-valign">
-              <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
-            </td>
-          </tr>
+              </td>
+              <td class="ot-valign">
+                <div class="checkbox">
+                  <label>
+                    <input id="completed" type="checkbox" />
+                  </label>
+                </div>
+              </td>
+              <td class="ot-valign">
+                <div class="checkbox">
+                  <label>
+                    <input id="notify" type="checkbox" />
+                  </label>
+                </div>
+              </td>
+              <td class="ot-valign">
+                <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
+                <button id="editTask-Btn" class="btn btn-primary">Edit Task</button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
