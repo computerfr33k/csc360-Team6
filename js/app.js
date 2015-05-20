@@ -14,11 +14,6 @@ $(function () {
   main();
 
   function main() {
-    // Initialize Material Bootstrap Theme
-    $.material.init();
-
-    var date = new Date(Date.parse(task.dueDate));
-
     db.open();
     
     var options = {
@@ -26,6 +21,8 @@ $(function () {
     };
     
     var taskList = new List('tasks', options);
+    
+    $.material.init();
   }
 
   /*
