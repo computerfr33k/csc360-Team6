@@ -10,19 +10,24 @@
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS files -->
     <link rel="stylesheet" href="lib/normalize/normalize.css">
-    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
+    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+    />
+    <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
     <!-- javascript files -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="bower_components/dexie/dist/latest/Dexie.min.js"></script>
+    <script src="lib/list.js/dist/list.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- /Javascript -->
   </head>
   
@@ -113,7 +118,7 @@
               <div class="sample1">
                 <div class="checkbox">
                   <label>
-                    <input id="notifications" type="checkbox"> Notifications</label>
+                    <input id="notifications" type="checkbox">Notifications</label>
                 </div>
                 <p class="hint">Notify me about updates to apps or games that I've downloaded</p>
               </div>
@@ -126,7 +131,73 @@
         </div>
       </div>
       <!-- /Options Dialog -->
+      <!-- Warning -->
+      <div class="alert alert-dismissable alert-warning" id="warning-alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Warning!</h4>
+        <p>Looks like you may have left some fields blank when adding a new task.</p>
+      </div>
+      <!-- /Warning -->
+      <!-- Task Table -->
+      <div id="tasks">
+        <table class="table table-hover table-bordered text-center">
+          <thead>
+            <tr>
+              <td class="sort" data-sort="subject">Subject</td>
+              <td class="sort" data-sort="title">Title</td>
+              <td class="sort col-sm-3" data-sort="dueDate">Due Date</td>
+              <td class="sort" data-sort="complete">Completed</td>
+              <td class="sort" data-sort="notify">Notify Me</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr class="bg-info">
+              <td class="ot-valign">
+                <label>
+                  <input class="form-control" id="subject" type="text" required="required" />
+                </label>
+              </td>
+              <td class="ot-valign">
+                <label>
+                  <input id="title" class="form-control" type="text" required="required" />
+                </label>
+              </td>
+              <td class="ot-valign">
+                <div class="form-group">
+                  <div class='input-group date' id='dueDatePicker'>
+                    <input id="dueDate" type='datetime' class="form-control form-control-success" required="required" />
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class="ot-valign">
+                <div class="checkbox">
+                  <label>
+                    <input id="completed" type="checkbox" />
+                  </label>
+                </div>
+              </td>
+              <td class="ot-valign">
+                <div class="checkbox">
+                  <label>
+                    <input id="notify" type="checkbox" />
+                  </label>
+                </div>
+              </td>
+              <td class="ot-valign">
+                <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
+                <button id="editTask-Btn" class="btn btn-primary">Edit Task</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /Task Table -->
     </div>
+    <script src="js/app.js"></script>
   </body>
 
 </html>
