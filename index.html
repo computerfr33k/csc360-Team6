@@ -10,12 +10,14 @@
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS files -->
     <link rel="stylesheet" href="lib/normalize/normalize.css">
-    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
+    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+    />
+    <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
     <!-- javascript files -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -24,6 +26,8 @@
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="bower_components/dexie/dist/latest/Dexie.min.js"></script>
     <script src="lib/list.js/dist/list.min.js"></script>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- /Javascript -->
   </head>
   
@@ -127,49 +131,63 @@
         </div>
       </div>
       <!-- /Options Dialog -->
-      <!-- Table View -->
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+      <!-- Task Table -->
+      <div id="tasks">
+        <table class="table table-hover table-bordered text-center">
           <thead>
             <tr>
-              <td>Subject</td>
-              <td>Title</td>
-              <td>Due Date</td>
-              <td>Completed</td>
-              <td>Notify Me</td>
+              <td class="sort" data-sort="subject">Subject</td>
+              <td class="sort" data-sort="title">Title</td>
+              <td class="sort col-sm-3" data-sort="dueDate">Due Date</td>
+              <td class="sort" data-sort="complete">Completed</td>
+              <td class="sort" data-sort="notify">Notify Me</td>
+              <td></td>
             </tr>
           </thead>
           <tbody class="list">
-            <tr>
-              <td class="subject">CSC 360</td>
-              <td class="title">Work on Final Project</td>
-              <td class="dueDate">06/11/2015 01:00 PM</td>
-              <td class="completed">No</td>
-              <td class="notify">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" checked>
-                  </label>
+            <tr class="bg-info">
+            <td class="ot-valign">
+              <label>
+                <input class="form-control" id="subject" type="text" />
+              </label>
+            </td>
+            <td class="ot-valign">
+              <label>
+                <input id="title" class="form-control" type="text" />
+              </label>
+            </td>
+            <td class="ot-valign">
+              <div class="form-group">
+                <div class='input-group date' id='dueDatePicker'>
+                  <input id="dueDate" type='text' class="form-control" />
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="subject">CSC 360</td>
-              <td class="title">Work on Final Project</td>
-              <td class="dueDate">06/11/2015 01:00 PM</td>
-              <td class="completed">No</td>
-              <td class="notify">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" checked>
-                  </label>
-                </div>
-              </td>
-            </tr>
+              </div>
+            </td>
+            <td class="ot-valign">
+              <div class="checkbox">
+                <label>
+                  <input id="completed" type="checkbox" />
+                </label>
+              </div>
+            </td>
+            <td class="ot-valign">
+              <div class="checkbox">
+                <label>
+                  <input id="notify" type="checkbox" />
+                </label>
+              </div>
+            </td>
+            <td class="ot-valign">
+              <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
-      <!-- /Table View -->
+      <!-- /Task Table -->
     </div>
     <script src="js/app.js"></script>
   </body>
