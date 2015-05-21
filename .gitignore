@@ -1,1 +1,3 @@
-*.pro.user
+vendor/
+node_modules/
+web/vendor/
