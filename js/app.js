@@ -21,17 +21,19 @@ $(function () {
     });
 
     $('#dueDatePicker').datetimepicker();
-    $('#warning-alert').hide();
     $('#editTask-Btn').hide();
 
     // setup click handler for add task button
     $('#addTask-Btn').click(function () {
       // prevent Fields from being blank
       if ($.trim($('#subject').val()) === "" || $.trim($('#title').val()) === "" || $.trim($('#dueDate').val()) === "") {
-        $('#warning-alert').fadeIn();
+        // show toast notification warning when user doesn't fill all text fields
+        $('.notifications.top-right').notify({
+          type: "warning",
+          message: {text: "You left some fields blank when trying to add a task. " }
+        }).show();
         return;
       }
-      $('#warning-alert').fadeOut();
 
       var task = {
         subject: $('#subject').val(),
