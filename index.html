@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
     <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-notify/css/bootstrap-notify.css"></link>
     <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
     <!-- javascript files -->
@@ -27,6 +28,7 @@
     <script src="lib/list.js/dist/list.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
     <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
     <!-- /Javascript -->
   </head>
   
@@ -105,6 +107,9 @@
       </div>
     </div>
     <div class="container">
+      <!-- Notifications -->
+      <div class="notifications top-right"></div>
+      <!-- /Notifications -->
       <!-- Options Dialog -->
       <div id="options-dialog" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
@@ -130,13 +135,6 @@
         </div>
       </div>
       <!-- /Options Dialog -->
-      <!-- Warning -->
-      <div class="alert alert-dismissable alert-warning" id="warning-alert">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <h4>Warning!</h4>
-        <p>Looks like you may have left some fields blank when adding a new task.</p>
-      </div>
-      <!-- /Warning -->
       <!-- Task Table -->
       <div id="tasks">
         <table class="table table-hover table-bordered text-center">
