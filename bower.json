@@ -1,21 +1,6 @@
 {
-  "name": "csc360-Team6",
-  "version": "0.0.1",
-  "homepage": "https://github.com/computerfr33k/csc360-Team6",
-  "authors": [
-    "Computerfr33k <computerfreak@computerfr33k.com>"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "web/vendor/",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "~2.1.4",
-    "bootstrap": "~3.3.4"
-  }
+    "name": "multitest",
+    "dependencies": {
+        "bootstrap": "*"
+    }
 }
