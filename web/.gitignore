@@ -1,0 +1,3 @@
+*.pro.user
+bower_components/
+lib/

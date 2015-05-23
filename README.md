@@ -8,4 +8,11 @@ Please do your work in your own branch, and then send a pull request to merge in
 ## Issues
 It would also be benefitial to make an issue if we want to organize who is working on what or if we want to add changes or anything like that.
 
+## Project Structure
+I have changed the structure because I am going to have this deploy to [Heroku][2] after we push to this branch to make it easier and automated to deploy and test on a remote server.
+I have moved the actual app into the `web` folder, the rest of it is just stuff for heroku to use for deployment info.
+The URL to access the deployed site is [here][3]
+
 [1]: http://bower.io/
+[2]: http://heroku.com
+[3]: https://ontrack-csc360.herokuapp.com

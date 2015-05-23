@@ -1,20 +1,5 @@
 {
-  "name": "OnTrack",
-  "version": "0.0.1",
-  "homepage": "https://github.com/computerfr33k/csc360-Team6",
-  "authors": [
-    "Computerfr33k <computerfreak@computerfr33k.com>"
-  ],
-  "description": "Manage your school work day to day",
-  "main": "index.html",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "name": "multitest",
   "dependencies": {
     "bootstrap-material-design": "~0.3.0",
     "bootstrap": "~3.3.4",
