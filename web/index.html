@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
     <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-notify/css/bootstrap-notify.css"></link>
+    <link rel="stylesheet" href="bower_components/bootstrap-notify/css/bootstrap-notify.css">
+    <link rel="stylesheet" href="bower_components/DataTables/media/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
     <!-- javascript files -->
@@ -25,13 +26,13 @@
     <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="bower_components/dexie/dist/latest/Dexie.min.js"></script>
-    <script src="lib/list.js/dist/list.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
     <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
+    <script src="bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <!-- /Javascript -->
   </head>
-  
+
   <body>
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an
@@ -137,15 +138,15 @@
       <!-- /Options Dialog -->
       <!-- Task Table -->
       <div id="tasks">
-        <table class="table table-hover table-bordered text-center">
+        <table id="taskTable" class="table table-hover table-bordered text-center">
           <thead>
             <tr>
-              <td class="sort" data-sort="subject">Subject</td>
-              <td class="sort" data-sort="title">Title</td>
-              <td class="sort col-sm-3" data-sort="dueDate">Due Date</td>
-              <td class="sort" data-sort="complete">Completed</td>
-              <td class="sort" data-sort="notify">Notify Me</td>
-              <td></td>
+              <th class="sort" data-sort="subject">Subject</th>
+              <th class="sort" data-sort="title">Title</th>
+              <th class="sort col-sm-3" data-sort="dueDate">Due Date</th>
+              <th class="sort" data-sort="complete">Completed</th>
+              <th class="sort" data-sort="notify">Notify Me</th>
+              <th></th>
             </tr>
           </thead>
           <tbody class="list">

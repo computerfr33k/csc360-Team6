@@ -6,9 +6,27 @@ $(function () {
   var db = new Dexie("OnTrack");
   var editBtns = $('.edit-item-btn'),
     removeBtns = $('.remove-item-btn');
+  var t = $('#taskTable').DataTable();
   main();
 
   function main() {
+    t.row.add([
+      "owbegjb",
+      "owbegjb",
+      "owbegjb",
+      '<div class="checkbox">\
+        <label>\
+          <input id="notify" type="checkbox" />\
+        </label>\
+      </div>',
+      '<div class="checkbox">\
+        <label>\
+          <input id="notify" type="checkbox" />\
+        </label>\
+      </div>',
+      '<button id="editTask-Btn" class="btn btn-primary">Edit Task</button>'
+    ]).draw();
+
     db.version(2).stores({
       // subject (string), title (string), dueDate (string),
       // completed (bool), notify (bool)
@@ -44,7 +62,7 @@ $(function () {
       };
       addTask(task);
     });
-    
+
     // click handler for saving edited task
     $('#editTask-Btn').click(function() {
       // switch the buttons since we are now adding a task.
@@ -67,6 +85,15 @@ $(function () {
     var complete = (task.completed) ? 'checked' : '';
     var notify = (task.notify) ? 'checked' : '';
 
+    t.row.add([
+      task.subject,
+      task.title,
+      task.dueDate,
+      task.completed,
+      task.notify,
+      ""
+    ]).draw();
+/*
     $('.list:last').append('<tr><td class="id hide ot-valign">' + task.id + '</td>\
               <td class="subject ot-valign">' + task.subject + '</td>\
               <td class="title ot-valign">' + task.title + '</td>\
@@ -89,6 +116,8 @@ $(function () {
               </td>\
               <td><button class="btn btn-primary edit-item-btn">Edit</button><button class="btn btn-primary remove-item-btn">Delete</button></td></tr>\
       ');
+      */
+
     refreshCallbacks();
     $.material.init();
   }
@@ -141,13 +170,13 @@ $(function () {
 
       $(this).closest('tr').remove();
     });
-    
+
     // Send Existing Data to Add Task inputs (re-using the same UI for both adding and editing).
     editBtns.click(function() {
       // switch the buttons since we are now editing a task.
       $('#addTask-Btn').hide();
       $('#editTask-Btn').show();
-      
+
       var itemId = Number($(this).closest('tr').find('.id').text());
       console.log(itemId);
     });

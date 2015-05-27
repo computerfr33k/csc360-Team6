@@ -6,6 +6,7 @@
     "jquery": "~2.1.4",
     "dexie": "~1.0.4",
     "eonasdan-bootstrap-datetimepicker": "~4.7.14",
-    "bootstrap-notify": "~0.2.0"
+    "bootstrap-notify": "~0.2.0",
+    "DataTables": "~1.10.7"
   }
 }
