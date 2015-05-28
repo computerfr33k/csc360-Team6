@@ -139,10 +139,16 @@ $(function () {
   function deleteTask(id) {
     db.task.delete(Number(id)).then(function () {
       t.row('.selected').remove().draw();
+      // Reset Add/Edit Task Area back to original state in case the user decided to delete a task while it was selected for editing.
+      clearFields();
+      $('#editTask-Btn').hide();
+      $('#addTask-Btn').show();
+      isEditing = false;
     });
   }
 
   function clearFields() {
+    $('#taskPanelTitle').text('Add Task');
     $('#subject').val('');
     $('#title').val('');
     $('#dueDate').val('');
