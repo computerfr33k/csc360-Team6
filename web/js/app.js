@@ -15,6 +15,8 @@ $(function () {
         { data: 'notify', title: "Notify Me" }
     ]
   });
+  var isEditing = false;
+  var currentTask = new Task();
 
   main();
 
@@ -45,13 +47,7 @@ $(function () {
         return;
       }
 
-      var task = {
-        subject: $('#subject').val(),
-        title: $('#title').val(),
-        dueDate: $('#dueDate').val(),
-        completed: $('#completed').prop('checked'),
-        notify: $('#notify').prop('checked')
-      };
+      var task = new Task(null, $('#subject').val(), $('#title').val(), $('#dueDate').val(), $('#completed').prop('checked'), $('#notify').prop('checked'));
       addTask(task);
     });
 
@@ -65,16 +61,32 @@ $(function () {
       $('#addTask-Btn').show();
       $('#editTask-Btn').hide();
       clearFields();
+      isEditing = false;
     });
 
     // click handler for when a row in table is selected
     $('#taskTable tbody').on('click', 'tr', function() {
+      // do not allow selecting another row while a row is being edited.
+      if(isEditing) {
+        return;
+      }
+
       if($(this).hasClass('selected')) {
         $(this).removeClass('selected');
       } else {
         t.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
       }
+    });
+
+    // click handler for deleting task
+    $('#deleteItemBtn').click(function() {
+      if(typeof(t.row('.selected').data()) == "undefined") {
+        return false;
+      }
+
+      var itemId = Number(t.row('.selected').data().id);
+      deleteTask(itemId);
     });
   }
 
@@ -125,8 +137,8 @@ $(function () {
   }
 
   function deleteTask(id) {
-    db.task.delete(Number(id)).then(function (r) {
-      console.log(JSON.stringify(r));
+    db.task.delete(Number(id)).then(function () {
+      t.row('.selected').remove().draw();
     });
   }
 
@@ -142,6 +154,9 @@ $(function () {
     if(typeof(t.row('.selected').data()) == "undefined") {
       return false;
     }
+    // make sure user cannot select or unselect the current row being edited until they have saved it.
+    isEditing = true;
+
     var itemId = Number(t.row('.selected').data().id);
     // switch the buttons since we are now editing a task.
     $('#taskPanelTitle').animate({'opacity': 0}, 500, function () {
@@ -152,6 +167,8 @@ $(function () {
     $('#editTask-Btn').show();
 
     var taskData = t.row('.selected').data();
+    currentTask = taskData;
+    console.log(currentTask);
     setTaskEntryData(taskData.subject, taskData.title, taskData.dueDate, taskData.completed, taskData.notify);
   });
 
