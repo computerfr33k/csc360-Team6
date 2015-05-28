@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
     <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-notify/css/bootstrap-notify.css">
-    <link rel="stylesheet" href="bower_components/DataTables/media/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
     <!-- javascript files -->
@@ -30,6 +30,7 @@
     <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
     <script src="bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <!-- /Javascript -->
   </head>
 
@@ -54,145 +55,84 @@
           <li>
             <a href="#" data-toggle="modal" data-target="#options-dialog">Options</a>
           </li>
-          <li class="dropdown">
-            <a href="http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html" data-target="#" class="dropdown-toggle"
-            data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="javascript:void(0)">Action</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)">Another action</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)">Something else here</a>
-              </li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Dropdown header</li>
-              <li>
-                <a href="javascript:void(0)">Separated link</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)">One more separated link</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <form class="navbar-form navbar-left">
-          <input type="text" class="form-control col-lg-8" placeholder="Search">
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="javascript:void(0)">Link</a>
-          </li>
-          <li class="dropdown">
-            <a href="http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html" data-target="#" class="dropdown-toggle"
-            data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="javascript:void(0)">Action</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)">Another action</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)">Something else here</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="javascript:void(0)">Separated link</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
       </div>
     </div>
     <div class="container">
       <!-- Notifications -->
       <div class="notifications top-right"></div>
       <!-- /Notifications -->
-      <!-- Options Dialog -->
-      <div id="options-dialog" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">Options</h4>
+      <!-- Add/Edit Task Form -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 id="taskPanelTitle" class="panel-title">Add Task</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-2">
+              Subject
             </div>
-            <div class="modal-body">
-              <div class="sample1">
-                <div class="checkbox">
-                  <label>
-                    <input id="notifications" type="checkbox">Notifications</label>
-                </div>
-                <p class="hint">Notify me about updates to apps or games that I've downloaded</p>
+            <div class="col-xs-3">
+              Title
+            </div>
+            <div class="col-xs-3">
+              Due Date
+            </div>
+            <div class="col-xs-1">
+              Completed
+            </div>
+            <div class="col-xs-1">
+              Notify Me
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-2">
+              <input type="text" id="subject" class="form-control" data-hint="Enter Subject Name, ex: CSC 360" required />
+            </div>
+            <div class="col-xs-3">
+              <input type="text" id="title" class="form-control" data-hint="Enter Title of this task, ex: Hw #1" required />
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                      <div class='input-group date' id='dueDatePicker'>
+                        <input id="dueDate" type='datetime' class="form-control form-control-success" required="required" />
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
+                    </div>
+            </div>
+            <div class="col-xs-1 text-center">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="completed" />
+                </label>
               </div>
             </div>
-            <div class="modal-footer">
-              <button id="options-save" class="btn btn-primary" data-dismiss="modal">Save</button>
-              <button id="options-cancel" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <div class="col-xs-1 text-center">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="notify" />
+                </label>
+              </div>
+            </div>
+            <div class="col-xs-1">
+              <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
+              <button id="editTask-Btn" class="btn btn-primary">Save Task</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- /Options Dialog -->
-      <!-- Task Table -->
-      <div id="tasks">
-        <table id="taskTable" class="table table-hover table-bordered text-center">
-          <thead>
-            <tr>
-              <th class="sort" data-sort="subject">Subject</th>
-              <th class="sort" data-sort="title">Title</th>
-              <th class="sort col-sm-3" data-sort="dueDate">Due Date</th>
-              <th class="sort" data-sort="complete">Completed</th>
-              <th class="sort" data-sort="notify">Notify Me</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr class="bg-info">
-              <td class="ot-valign">
-                <label>
-                  <input class="form-control" id="subject" type="text" required="required" />
-                </label>
-              </td>
-              <td class="ot-valign">
-                <label>
-                  <input id="title" class="form-control" type="text" required="required" />
-                </label>
-              </td>
-              <td class="ot-valign">
-                <div class="form-group">
-                  <div class='input-group date' id='dueDatePicker'>
-                    <input id="dueDate" type='datetime' class="form-control form-control-success" required="required" />
-                    <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td class="ot-valign">
-                <div class="checkbox">
-                  <label>
-                    <input id="completed" type="checkbox" />
-                  </label>
-                </div>
-              </td>
-              <td class="ot-valign">
-                <div class="checkbox">
-                  <label>
-                    <input id="notify" type="checkbox" />
-                  </label>
-                </div>
-              </td>
-              <td class="ot-valign">
-                <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
-                <button id="editTask-Btn" class="btn btn-primary">Edit Task</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- /End Add/Edit Task Form -->
+      <!-- Edit/Delete Task Table Buttons -->
+      <div class="row">
+        <button id="editItemBtn" class="btn btn-primary">Edit Selected Task</button>
+        <button id="deleteItemBtn" class="btn btn-primary">Delete Selected Task</button>
       </div>
+      <!-- /end Edit/Delete Task Table Buttons -->
+      <!-- Task Table -->
+      <table id="taskTable" class="table table-hover table-bordered text-center">
+      </table>
       <!-- /Task Table -->
     </div>
     <script src="js/app.js"></script>

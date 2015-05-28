@@ -4,29 +4,21 @@ $(function () {
   'use strict';
   // Initialize the IDB
   var db = new Dexie("OnTrack");
-  var editBtns = $('.edit-item-btn'),
-    removeBtns = $('.remove-item-btn');
-  var t = $('#taskTable').DataTable();
+  var t = $('#taskTable').DataTable({
+    data: [],
+    columns: [
+        { data: 'id', title: "Id" },
+        { data: 'subject', title: "Subject" },
+        { data: 'title', title: "Title" },
+        { data: 'dueDate', title: "Due Date" },
+        { data: 'completed', title: "Completed" },
+        { data: 'notify', title: "Notify Me" }
+    ]
+  });
+
   main();
 
   function main() {
-    t.row.add([
-      "owbegjb",
-      "owbegjb",
-      "owbegjb",
-      '<div class="checkbox">\
-        <label>\
-          <input id="notify" type="checkbox" />\
-        </label>\
-      </div>',
-      '<div class="checkbox">\
-        <label>\
-          <input id="notify" type="checkbox" />\
-        </label>\
-      </div>',
-      '<button id="editTask-Btn" class="btn btn-primary">Edit Task</button>'
-    ]).draw();
-
     db.version(2).stores({
       // subject (string), title (string), dueDate (string),
       // completed (bool), notify (bool)
@@ -66,8 +58,23 @@ $(function () {
     // click handler for saving edited task
     $('#editTask-Btn').click(function() {
       // switch the buttons since we are now adding a task.
+      $('#taskPanelTitle').animate({'opacity': 0}, 500, function () {
+        $(this).text('Add Task');
+      }).animate({"opacity": 1}, 500);
+
       $('#addTask-Btn').show();
       $('#editTask-Btn').hide();
+      clearFields();
+    });
+
+    // click handler for when a row in table is selected
+    $('#taskTable tbody').on('click', 'tr', function() {
+      if($(this).hasClass('selected')) {
+        $(this).removeClass('selected');
+      } else {
+        t.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+      }
     });
   }
 
@@ -82,43 +89,14 @@ $(function () {
 
   function addTaskToTable(task) {
     // Add all tasks to table
-    var complete = (task.completed) ? 'checked' : '';
-    var notify = (task.notify) ? 'checked' : '';
+    var complete = (task.completed) ? 'Yes' : 'No';
+    var notify = (task.notify) ? 'Yes' : 'No';
 
-    t.row.add([
-      task.subject,
-      task.title,
-      task.dueDate,
-      task.completed,
-      task.notify,
-      ""
-    ]).draw();
-/*
-    $('.list:last').append('<tr><td class="id hide ot-valign">' + task.id + '</td>\
-              <td class="subject ot-valign">' + task.subject + '</td>\
-              <td class="title ot-valign">' + task.title + '</td>\
-              <td class="dueDate ot-valign">\
-                ' + task.dueDate + '\
-              </td>\
-              <td class="completed ot-valign">\
-                <div class="checkbox">\
-                  <label>\
-                    <input type="checkbox" disabled ' + complete + '/>\
-                  </label>\
-                </div>\
-              </td>\
-              <td class="notify ot-valign">\
-                <div class="checkbox">\
-                  <label>\
-                    <input type="checkbox" disabled ' + notify + ' />\
-                  </label>\
-                </div>\
-              </td>\
-              <td><button class="btn btn-primary edit-item-btn">Edit</button><button class="btn btn-primary remove-item-btn">Delete</button></td></tr>\
-      ');
-      */
+    task.completed = complete;
+    task.notify = notify;
 
-    refreshCallbacks();
+    t.row.add(task).draw();
+
     $.material.init();
   }
 
@@ -160,25 +138,28 @@ $(function () {
     $('#notify').prop('checked', 'checked');
   }
 
-  function refreshCallbacks() {
-    removeBtns = $(removeBtns.selector);
-    editBtns = $(editBtns.selector);
+  $('#editItemBtn').click(function() {
+    if(typeof(t.row('.selected').data()) == "undefined") {
+      return false;
+    }
+    var itemId = Number(t.row('.selected').data().id);
+    // switch the buttons since we are now editing a task.
+    $('#taskPanelTitle').animate({'opacity': 0}, 500, function () {
+      $(this).text('Editing Task');
+    }).animate({"opacity": 1}, 500);
 
-    removeBtns.click(function () {
-      var itemId = $(this).closest('tr').find('.id').text();
-      deleteTask(itemId);
+    $('#addTask-Btn').hide();
+    $('#editTask-Btn').show();
 
-      $(this).closest('tr').remove();
-    });
+    var taskData = t.row('.selected').data();
+    setTaskEntryData(taskData.subject, taskData.title, taskData.dueDate, taskData.completed, taskData.notify);
+  });
 
-    // Send Existing Data to Add Task inputs (re-using the same UI for both adding and editing).
-    editBtns.click(function() {
-      // switch the buttons since we are now editing a task.
-      $('#addTask-Btn').hide();
-      $('#editTask-Btn').show();
-
-      var itemId = Number($(this).closest('tr').find('.id').text());
-      console.log(itemId);
-    });
+  function setTaskEntryData(subject, title, dueDate, completed, notify) {
+    $('#subject').val(subject);
+    $('#title').val(title);
+    $('#dueDate').val(dueDate);
+    $('#completed').prop('checked', (completed.toLowerCase() === "yes") ? true : false);
+    $('#notify').prop('checked', (notify.toLowerCase() === "yes") ? true : false);
   }
 });

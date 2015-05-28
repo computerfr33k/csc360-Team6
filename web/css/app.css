@@ -1,9 +1,19 @@
 /* Application Styles */
 body {
   /* min-height: 2000px; */
-  padding-top: 70px;
+  padding-top: 75px;
+  font-size: 140%;
+}
+
+.table-hover tbody tr.selected > td {
+  background-color: #b0bed9;
 }
 
 .ot-valign {
   vertical-align: middle !important;
+}
+
+.fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
 }
