@@ -8,6 +8,6 @@
     "eonasdan-bootstrap-datetimepicker": "~4.7.14",
     "bootstrap-notify": "~0.2.0",
     "DataTables": "~1.10.7",
-    "bootstrap3-typeahead": "git@github.com:bassjobsen/Bootstrap-3-Typeahead.git#master"
+    "bootstrap3-typeahead": "https://github.com/bassjobsen/Bootstrap-3-Typeahead.git#master"
   }
 }
