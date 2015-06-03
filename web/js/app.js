@@ -2,6 +2,9 @@
 
 $(function () {
   'use strict';
+  
+  var subjectAutocomplete = [];
+  var titleAutocomplete = [];
   // Initialize the IDB
   var db = new Dexie("OnTrack");
   var t = $('#taskTable').DataTable({
@@ -28,9 +31,7 @@ $(function () {
       settings: 'label,value'
     });
     // open database for storing tasks
-    db.open().then(function () {
-      initTasks();
-    });
+    db.open().then(initTasks);
 
     $('#dueDatePicker').datetimepicker();
     $('#editTask-Btn').hide();
@@ -91,10 +92,12 @@ $(function () {
   }
 
   function initTasks() {
+      var subjectAutocomplete = [];
+      var titleAutocomplete = [];
     db.task.orderBy("id").each(function (tasks) {
       addTaskToTable(tasks);
     }).then(function () {
-      $.material.init();
+      $.material.init();      
     });
     clearFields();
   }
@@ -106,6 +109,14 @@ $(function () {
 
     task.completed = complete;
     task.notify = notify;
+    
+    $('#subject').typeahead('destroy');
+    subjectAutocomplete.push(task.subject);
+    $('#subject').typeahead({source: subjectAutocomplete});
+    
+    $('#title').typeahead('destroy');
+    titleAutocomplete.push(task.title);
+    $('#title').typeahead({source: titleAutocomplete});
 
     t.row.add(task).draw();
 

@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
     <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-notify/css/bootstrap-notify.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="lib/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
     <!-- javascript files -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="bower_components/dexie/dist/latest/Dexie.min.js"></script>
@@ -30,7 +31,7 @@
     <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
     <script src="bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="lib/datatables/dataTables.bootstrap.js"></script>
     <!-- /Javascript -->
   </head>
 
@@ -81,10 +82,10 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" id="subject" class="form-control" data-hint="Enter Subject Name, ex: CSC 360" required />
+                  <input type="text" id="subject" class="form-control typeahead" data-provide="typeahead" data-hint="Enter Subject Name, ex: CSC 360" autocomplete="off" required />
                 </td>
                 <td>
-                  <input type="text" id="title" class="form-control" data-hint="Enter Title of this task, ex: Hw #1" required />
+                  <input type="text" id="title" class="form-control" data-hint="Enter Title of this task, ex: Hw #1" autocomplete="off" required />
                 </td>
                 <td class="col-xs-3">
                   <div class="form-group">
