@@ -154,7 +154,7 @@ $(function() {
         setInterval(checkDeadlines, 1000);
     }
 
-    function initTasks() {
+    function initTasks() {        
         var subjectAutocomplete = [];
         var titleAutocomplete = [];
         db.task.orderBy("id")
