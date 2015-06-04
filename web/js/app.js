@@ -64,8 +64,8 @@ $(function() {
             .click(function() {
                 var task = new Task(currentTask.id, $('#subject').val(), $('#title').val(), $('#dueDate').val(),
                     $('#completed').prop('checked'), $('#notify').prop('checked'));
-                if($.trim($('#subject').val()) === "" || $.trim($('#title').val()) === "" ||
-                    $.trim($('#dueDate').val()) === "") {
+                    
+                if($.trim($('#subject').val()) === "" || $.trim($('#title').val()) === "" || $.trim($('#dueDate').val()) === "") {
                     // show toast notification warning when user doesn't fill all text fields
                     $('.notifications.top-right')
                         .notify({
@@ -194,23 +194,21 @@ $(function() {
     function editTask(task)
     {
         var deferred = new $.Deferred();
-        task.completed = (task.completed) ? "Yes" : "No";
-        task.notify = (task.notify) ? "Yes" : "No";
-
+        console.log(task.id);
         db.task.update(Number(task.id), task)
             .then(function(updated) {
                 if(updated) {
-                    console.log("Updated: " + task);
-
                     /* Update data in table row */
+                    task.completed = (task.completed) ? "Yes" : "No";
+                    task.notify = (task.notify) ? "Yes" : "No";
                     t.row('.selected').data(task).draw();
                     deferred.resolve(true);
                 } else {
                     deferred.resolve(false);
                 }
             });
-
-        return deferred.promise();
+            
+            return deferred.promise();
     }
 
     function deleteTask(id)
