@@ -59,6 +59,47 @@
         </div>
     </div>
     <div class="container">
+      <!-- First Time Welcome Screen -->
+      <div id="help-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header"><h2>Welcome to OnTrack!</h2></div>
+            <div class="modal-body">
+              <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                  <li><a href="#add-task" data-toggle="tab">Adding A Task</a></li>
+                  <li><a href="#edit-task" data-toggle="tab">Edit A Task</a></li>
+                  <li><a href="#delete-task" data-toggle="tab">Delete A Task</a></li>
+              </ul>
+
+              <div id="helpTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="home">
+                  OnTrack is a task manager design with school type tasks in mind.
+                  OnTrack allows you to sort your tasks in the table below by clicking on the column header.
+                  If you want to sort with multiple columns, just hold shift while clicking on the other tab.
+                </div>
+                <div class="tab-pane fade" id="add-task">
+                  To add a task, just fill out the form on the top where it says Add Task and then click the add task button once your are done filling it out.
+                  The task will then be added to the table below.
+                </div>
+                <div class="tab-pane fade" id="edit-task">
+                  To edit a task, start by selecting a row from the table with the task that you want to change.
+                  Then click on the Edit Selected Task button above the table. This will then put the existing task information into the form on top where you can make changes and then save them back.
+                </div>
+                <div class="tab-pane fade" id="delete-task">
+                  To Delete a task, select the row with the task you want to remove and then click on the Delete Selected Task Button above the table.
+                  The task will then be removed.
+                </div>
+              </div>
+            </div><!-- /modal-body -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal"><i class="mdi-navigation-close"></i> Close</button>
+            </div><!-- /modal-footer -->
+          </div><!-- /modal-content -->
+        </div><!-- /modal-dialog -->
+      </div><!-- /help-modal -->
+      <!-- /First Time Welcome Screen -->
+
         <!-- Notifications -->
         <div class="notifications top-right"></div>
         <!-- /Notifications -->
