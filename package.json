@@ -1,14 +1,35 @@
 {
-  "name": "multitest",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "ontrack",
+  "version": "1.0.0",
+  "description": "Manage your homework day to day.",
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "bootstrap-3-typeahead": "^4.0.2",
+    "bootstrap-material-design": "^0.5.10",
+    "bootstrap-notify": "^3.1.3",
+    "datatables": "^1.10.12",
+    "datatables.net": "^1.10.12",
+    "datatables.net-bs": "^1.10.12",
+    "dexie": "^1.5.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43",
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.0",
+    "laravel-elixir": "^6.0.0-13",
+    "normalize.css": "^5.0.0"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bower": "~1.3.3"
-  }
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/computerfr33k/csc360-Team6.git"
+  },
+  "author": "Eric Pfeiffer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/computerfr33k/csc360-Team6/issues"
+  },
+  "homepage": "https://gitlab.com/computerfr33k/csc360-Team6#README"
 }

@@ -9,173 +9,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS files -->
-    <link async rel="stylesheet" href="lib/normalize/normalize.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/roboto.min.css">
-    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-notify/css/bootstrap-notify.css">
-    <link rel="stylesheet" href="lib/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/app.css">
     <!-- /CSS -->
-    <!-- javascript files -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
-    <script src="bower_components/dexie/dist/latest/Dexie.min.js"></script>
-    <script src="bower_components/moment/min/moment.min.js"></script>
-    <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="bower_components/bootstrap-notify/js/bootstrap-notify.js"></script>
-    <script src="bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="lib/datatables/dataTables.bootstrap.js"></script>
-    <!-- /Javascript -->
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-      <p class="browserupgrade">You are using an
-        <strong>outdated</strong>browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a>to improve your experience.</p>
-    <![endif]-->
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="javascript:void(0)">OnTrack</a>
-        </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#help-dialog">Help</a>
-                </li>
-        </div>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an
+    <strong>outdated</strong>browser. Please
+    <a href="http://browsehappy.com/">upgrade your browser</a>to improve your experience.</p>
+<![endif]-->
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:void(0)">OnTrack</a>
     </div>
-    <div class="container">
-      <!-- First Time Welcome Screen -->
-      <div id="help-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#" data-toggle="modal" data-target="#help-dialog">Help</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <!-- First Time Welcome Screen -->
+    <div id="help-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header"><h2>Welcome to OnTrack!</h2></div>
-            <div class="modal-body">
-              <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                  <li><a href="#add-task" data-toggle="tab">Adding A Task</a></li>
-                  <li><a href="#edit-task" data-toggle="tab">Edit A Task</a></li>
-                  <li><a href="#delete-task" data-toggle="tab">Delete A Task</a></li>
-              </ul>
+            <div class="modal-content">
+                <div class="modal-header"><h2>Welcome to OnTrack!</h2></div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                        <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                        <li><a href="#add-task" data-toggle="tab">Adding A Task</a></li>
+                        <li><a href="#edit-task" data-toggle="tab">Edit A Task</a></li>
+                        <li><a href="#delete-task" data-toggle="tab">Delete A Task</a></li>
+                    </ul>
 
-              <div id="helpTabContent" class="tab-content">
-                <div class="tab-pane fade active in" id="home">
-                  OnTrack is a task manager design with school type tasks in mind.
-                  OnTrack allows you to sort your tasks in the table below by clicking on the column header.
-                  If you want to sort with multiple columns, just hold shift while clicking on the other tab.
-                </div>
-                <div class="tab-pane fade" id="add-task">
-                  To add a task, just fill out the form on the top where it says Add Task and then click the add task button once your are done filling it out.
-                  The task will then be added to the table below.
-                </div>
-                <div class="tab-pane fade" id="edit-task">
-                  To edit a task, start by selecting a row from the table with the task that you want to change.
-                  Then click on the Edit Selected Task button above the table. This will then put the existing task information into the form on top where you can make changes and then save them back.
-                </div>
-                <div class="tab-pane fade" id="delete-task">
-                  To Delete a task, select the row with the task you want to remove and then click on the Delete Selected Task Button above the table.
-                  The task will then be removed.
-                </div>
-              </div>
-            </div><!-- /modal-body -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal"><i class="mdi-navigation-close"></i> Close</button>
-            </div><!-- /modal-footer -->
-          </div><!-- /modal-content -->
+                    <div id="helpTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="home">
+                            OnTrack is a task manager design with school type tasks in mind.
+                            OnTrack allows you to sort your tasks in the table below by clicking on the column header.
+                            If you want to sort with multiple columns, just hold shift while clicking on the other tab.
+                        </div>
+                        <div class="tab-pane fade" id="add-task">
+                            To add a task, just fill out the form on the top where it says Add Task and then click the
+                            add task button once your are done filling it out.
+                            The task will then be added to the table below.
+                        </div>
+                        <div class="tab-pane fade" id="edit-task">
+                            To edit a task, start by selecting a row from the table with the task that you want to
+                            change.
+                            Then click on the Edit Selected Task button above the table. This will then put the existing
+                            task information into the form on top where you can make changes and then save them back.
+                        </div>
+                        <div class="tab-pane fade" id="delete-task">
+                            To Delete a task, select the row with the task you want to remove and then click on the
+                            Delete Selected Task Button above the table.
+                            The task will then be removed.
+                        </div>
+                    </div>
+                </div><!-- /modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-flat" data-dismiss="modal"><i
+                            class="mdi-navigation-close"></i> Close
+                    </button>
+                </div><!-- /modal-footer -->
+            </div><!-- /modal-content -->
         </div><!-- /modal-dialog -->
-      </div><!-- /help-modal -->
-      <!-- /First Time Welcome Screen -->
+    </div><!-- /help-modal -->
+    <!-- /First Time Welcome Screen -->
 
-        <!-- Notifications -->
-        <div class="notifications top-right"></div>
-        <!-- /Notifications -->
-        <!-- Add/Edit Task Form -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 id="taskPanelTitle" class="panel-title">Add Task</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Subject</th>
-                            <th>Title</th>
-                            <th>Due Date</th>
-                            <th>Completed</th>
-                            <th>Notify Me</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="text" id="subject" class="form-control typeahead" data-provide="typeahead" data-hint="Enter Subject Name, ex: CSC 360" autocomplete="off" required />
-                            </td>
-                            <td>
-                                <input type="text" id="title" class="form-control" data-hint="Enter Title of this task, ex: Hw #1" autocomplete="off" required />
-                            </td>
-                            <td class="col-xs-3">
-                                <div class="form-group">
-                                    <div class='input-group date' id='dueDatePicker'>
-                                        <input id="dueDate" type='datetime' class="form-control form-control-success" required="required" />
-                                        <span class="input-group-addon">
+    <!-- Notifications -->
+    <div class="notifications top-right"></div>
+    <!-- /Notifications -->
+    <!-- Add/Edit Task Form -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 id="taskPanelTitle" class="panel-title">Add Task</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Completed</th>
+                    <th>Notify Me</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input type="text" id="subject" class="form-control typeahead" data-provide="typeahead"
+                               data-hint="Enter Subject Name, ex: CSC 360" autocomplete="off" required/>
+                    </td>
+                    <td>
+                        <input type="text" id="title" class="form-control"
+                               data-hint="Enter Title of this task, ex: Hw #1" autocomplete="off" required/>
+                    </td>
+                    <td class="col-xs-3">
+                        <div class="form-group">
+                            <div class='input-group date' id='dueDatePicker'>
+                                <input id="dueDate" type='datetime' class="form-control form-control-success"
+                                       required="required"/>
+                                <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="completed" />
-                                    </label>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="notify" />
-                                    </label>
-                                </div>
-                            </td>
-                            <td>
-                                <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
-                                <button id="editTask-Btn" class="btn btn-primary">Save Task</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="completed"/>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="notify"/>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <button id="addTask-Btn" class="btn btn-primary">Add Task</button>
+                        <button id="editTask-Btn" class="btn btn-primary">Save Task</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <!-- /End Add/Edit Task Form -->
-        <!-- Edit/Delete Task Table Buttons -->
-        <div class="row">
-            <button id="editItemBtn" class="btn btn-primary">Edit Selected Task</button>
-            <button id="deleteItemBtn" class="btn btn-primary">Delete Selected Task</button>
-        </div>
-        <!-- /end Edit/Delete Task Table Buttons -->
-        <!-- Task Table -->
-        <table id="taskTable" class="table table-hover table-bordered text-center">
-        </table>
-        <!-- /Task Table -->
     </div>
-    <script src="js/task.js"></script>
-    <script src="js/notification.js"></script>
-    <script src="js/app.js"></script>
+    <!-- /End Add/Edit Task Form -->
+    <!-- Edit/Delete Task Table Buttons -->
+    <div class="row">
+        <button id="editItemBtn" class="btn btn-primary">Edit Selected Task</button>
+        <button id="deleteItemBtn" class="btn btn-primary">Delete Selected Task</button>
+    </div>
+    <!-- /end Edit/Delete Task Table Buttons -->
+    <!-- Task Table -->
+    <table id="taskTable" class="table table-hover table-bordered text-center">
+    </table>
+    <!-- /Task Table -->
+</div>
+<script type="text/javascript" src="js/all.js"></script>
+<script type="text/javascript" src="js/task.js"></script>
+<script type="text/javascript" src="js/notification.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 </body>
 
 </html>

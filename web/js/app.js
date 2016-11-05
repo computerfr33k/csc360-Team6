@@ -1,5 +1,5 @@
 /* Application Sripts */
-$(function() {
+$(function () {
     'use strict';
 
     // array of strings for autocomplete
@@ -39,7 +39,7 @@ $(function() {
         db.version(3).stores({
             // subject (string), title (string), dueDate (string),
             // completed (bool), notify (bool)
-            task: 'id++,subject,title,dueDate,completed,notify,notified',
+            task: '++id,subject,title,dueDate,completed,notify,notified',
             settings: 'label,value'
         });
         // open database for storing tasks
@@ -50,7 +50,7 @@ $(function() {
 
         // setup click handler for add task button
         $('#addTask-Btn')
-            .click(function() {
+            .click(function () {
                 // prevent Fields from being blank
                 if ($.trim($('#subject').val()) === "" || $.trim($('#title').val()) === "" ||
                     $.trim($('#dueDate').val()) === "") {
@@ -73,7 +73,7 @@ $(function() {
 
         // click handler for saving edited task
         $('#editTask-Btn')
-            .click(function() {
+            .click(function () {
                 var task = new Task(currentTask.id, $('#subject').val(), $('#title').val(), $('#dueDate').val(),
                     $('#completed').prop('checked'), $('#notify').prop('checked'));
 
@@ -91,14 +91,14 @@ $(function() {
                 }
 
                 /* returns boolean whether the db was successfully updated or not */
-                editTask(task).then(function(result) {
+                editTask(task).then(function (result) {
                     if (result) {
                         // switch the buttons since we are now adding a task.
                         $('#taskPanelTitle')
                             .animate({
                                     'opacity': 0
                                 }, 500,
-                                function() {
+                                function () {
                                     $(this).text('Add Task');
                                 })
                             .animate({
@@ -125,7 +125,7 @@ $(function() {
 
         // click handler for when a row in table is selected
         $('#taskTable tbody')
-            .on('click', 'tr', function() {
+            .on('click', 'tr', function () {
                 // do not allow selecting another row while a row is being edited.
                 if (isEditing) {
                     return;
@@ -141,7 +141,7 @@ $(function() {
 
         // click handler for deleting task
         $('#deleteItemBtn')
-            .click(function() {
+            .click(function () {
                 if (typeof(t.row('.selected').data()) == "undefined") {
                     return false;
                 }
@@ -154,14 +154,14 @@ $(function() {
         setInterval(checkDeadlines, 1000);
     }
 
-    function initTasks() {        
+    function initTasks() {
         var subjectAutocomplete = [];
         var titleAutocomplete = [];
         db.task.orderBy("id")
-            .each(function(tasks) {
+            .each(function (tasks) {
                 addTaskToTable(tasks);
             })
-            .then(function() {
+            .then(function () {
                 $.material.init();
             });
         clearFields();
@@ -197,18 +197,18 @@ $(function() {
      */
     function addTask(task) {
         db.task.add({
-                subject: task.subject,
-                title: task.title,
-                dueDate: task.dueDate,
-                completed: task.completed,
-                notify: task.notify,
-                notified: false
-            })
-            .catch(function(e) {
+            subject: task.subject,
+            title: task.title,
+            dueDate: task.dueDate,
+            completed: task.completed,
+            notify: task.notify,
+            notified: false
+        })
+            .catch(function (e) {
                 console.log("ERROR: " + e);
 
             })
-            .then(function(id) {
+            .then(function (id) {
                 task.id = id;
                 addTaskToTable(task);
                 clearFields();
@@ -221,25 +221,27 @@ $(function() {
         // set task to not have been already notified since we are editing it.
         task.notified = false;
 
-        db.task.update(Number(task.id), task)
-            .then(function(updated) {
-                if (updated) {
-                    /* Update data in table row */
-                    task.completed = (task.completed) ? "Yes" : "No";
-                    task.notify = (task.notify) ? "Yes" : "No";
-                    t.row('.selected').data(task).draw();
-                    deferred.resolve(true);
-                } else {
-                    deferred.resolve(false);
-                }
-            });
+        db.transaction('rw', db.task, function () {
+            return db.task.update(Number(task.id), task)
+                .then(function (updated) {
+                    if (updated) {
+                        /* Update data in table row */
+                        task.completed = (task.completed) ? "Yes" : "No";
+                        task.notify = (task.notify) ? "Yes" : "No";
+                        t.row('.selected').data(task).draw();
+                        deferred.resolve(true);
+                    } else {
+                        deferred.resolve(false);
+                    }
+                });
+        });
 
         return deferred.promise();
     }
 
     function deleteTask(id) {
         db.task.delete(Number(id))
-            .then(function() {
+            .then(function () {
                 t.row('.selected').remove().draw();
                 // Reset Add/Edit Task Area back to original state in case the user decided to delete a task while it
                 // was selected for editing.
@@ -260,7 +262,7 @@ $(function() {
     }
 
     $('#editItemBtn')
-        .click(function() {
+        .click(function () {
             if (typeof(t.row('.selected').data()) == "undefined") {
                 return false;
             }
@@ -273,7 +275,7 @@ $(function() {
                 .animate({
                         'opacity': 0
                     }, 500,
-                    function() {
+                    function () {
                         $(this).text('Editing Task');
                     })
                 .animate({
@@ -285,7 +287,7 @@ $(function() {
 
             var taskData = t.row('.selected').data();
             currentTask = taskData;
-            console.log(currentTask);
+            // console.log(currentTask);
             setTaskEntryData(taskData.subject, taskData.title, taskData.dueDate, taskData.completed, taskData.notify);
         });
 
@@ -306,32 +308,34 @@ $(function() {
         hourCheck = hourCheck ? hourCheck : 12;
 
         var ampm = now.getHours() >= 12 ? 'PM' : 'AM';
-        var dayCheck = now.getDate();
-        var monthCheck = now.getMonth();
-        var yearCheck = now.getFullYear();
+        // var dayCheck = now.getDate();
+        // var monthCheck = now.getMonth();
+        // var yearCheck = now.getFullYear();
 
-        console.log(now.toLocaleDateString() + " " + hourCheck + ":" + minuteCheck + " " + ampm);
+        // console.log(now.toLocaleDateString() + " " + hourCheck + ":" + minuteCheck + " " + ampm);
         var currentDateTimeStr = now.toLocaleDateString() + " " + hourCheck + ":" + minuteCheck + " " + ampm;
 
-        db.task.orderBy("dueDate")
-            .each(function(task) {
-                console.log(task.notified);
+        db.task.orderBy("dueDate").toArray()
+            .then(function (tasks) {
+                $.each(tasks, function (index, task) {
+                    var dueDate = new Date(task.dueDate);
+                    var hour = dueDate.getHours() % 12;
+                    hour = hour ? hour : 12;
+                    var dueDateAMPM = dueDate.getHours() >= 12 ? 'PM' : 'AM';
+                    var dueDateStr = dueDate.toLocaleDateString() + " " + hour + ":" + dueDate.getMinutes() + " " + dueDateAMPM;
 
-                var dueDate = new Date(task.dueDate);
-                var hour = dueDate.getHours() % 12;
-                hour = hour ? hour : 12;
-                var dueDateAMPM = dueDate.getHours() >= 12 ? 'PM' : 'AM';
-                var dueDateStr = dueDate.toLocaleDateString() + " " + hour + ":" + dueDate.getMinutes() + " " + dueDateAMPM;
+                    // if date/time and notifications are on, show overdue notification
+                    if (dueDateStr === currentDateTimeStr && task.notify && !task.notified && !task.completed) {
+                        createNotification(task.title);
+                        task.notified = true;
 
-                // if date/time and notifications are on, show overdue notification
-                if (dueDateStr === currentDateTimeStr && task.notify && !task.notified && !task.completed) {
-                    createNotification(task.title);
-                    task.notified = true;
-
-                    db.task.update(Number(task.id), task).then(function(resp) {
-                        console.log(resp);
-                    });
-                }
+                        db.transaction('rw', db.task, function () {
+                            db.task.update(Number(task.id), task);
+                        }).catch(function (error) {
+                            console.error(error);
+                        });
+                    }
+                });
             });
     }
 });
