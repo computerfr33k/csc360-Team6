@@ -14,7 +14,7 @@
     "dexie": "^1.5.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.43",
     "gulp": "^3.9.1",
-    "jquery": "^3.1.0",
+    "jquery": "^3.5.0",
     "laravel-elixir": "^6.0.0-13",
     "normalize.css": "^5.0.0"
   },
